@@ -1,0 +1,111 @@
+# Hindi–English (Hinglish) Tokenizer
+
+A from‑scratch bilingual tokenizer that converts mixed Hindi and English text into numerical tokens without using any prebuilt NLP tokenization libraries. The project demonstrates how large language models preprocess raw text before feeding it into neural networks.
+
+## Overview
+
+This project implements a custom Natural Language Processing (NLP) pipeline capable of handling:
+
+* English words
+* Hindi (Devanagari) words
+* Hinglish mixed sentences
+* Numbers and punctuation
+* Unknown words using character fallback
+
+The tokenizer dynamically builds its own vocabulary and converts sentences into numerical IDs and back to text.
+
+
+## What is Tokenization?
+
+Tokenization is the process of breaking raw text into smaller meaningful units called *tokens*. Machine learning models cannot understand text directly; they operate on numbers. Therefore, every word or subword must be mapped to a numerical representation.
+
+Example:
+
+Input:
+मुझे assignment nahi mila
+Tokenized Output:
+[11, 8, 5, 12, 13, 14, 15]
+
+
+## Features
+
+* Custom vocabulary creation (no external tokenizer libraries)
+* Unicode‑aware Hindi + English word detection
+* Handles unseen words using character‑level fallback
+* Bidirectional conversion (Encode & Decode)
+* Modular architecture (separate components for clarity)
+
+
+## Project Structure
+
+hinglish_tokenizer/
+│
+├── main.py          # Entry point
+├── normalizer.py    # Text cleaning
+├── splitter.py      # Hindi + English word splitting
+├── vocabulary.py    # Token ID management
+└── tokenizer.py     # Pipeline integration
+
+
+## Installation & Running
+
+1. Clone or download the project
+2. Open terminal in project folder
+3. Run the program
+python main.py
+
+
+## How It Works
+
+### 1. Normalization
+
+* Converts text to lowercase
+* Removes extra spaces
+
+### 2. Splitting
+
+Detects language using Unicode ranges:
+
+* English letters (ASCII)
+* Hindi letters (Devanagari Unicode \u0900–\u097F)
+* Numbers
+* Symbols
+
+### 3. Vocabulary Building
+
+Creates unique numeric ID for every token encountered during training.
+
+### 4. Encoding
+
+Converts tokens into numerical representation.
+
+### 5. Unknown Word Handling
+
+If a word does not exist in vocabulary, it is broken into characters and added dynamically.
+
+
+
+## Example Run
+Enter Sentence: मुझे assignment nahi mila
+
+Encoded: [11, 8, 5, 12, 13, 14, 15]
+Decoded: मुझे assignment nahi m i l a
+
+
+## Learning Outcome
+
+This project demonstrates the preprocessing stage used in modern Large Language Models (LLMs). It provides understanding of:
+
+* Text normalization
+* Multilingual tokenization
+* Vocabulary mapping
+* Open vocabulary handling
+* NLP preprocessing pipelines
+
+## Future Improvements
+
+* Implement Byte Pair Encoding (BPE)
+* Add dataset training support
+* Add padding & batching
+* Save and load vocabulary from file
+
